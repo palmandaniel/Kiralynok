@@ -68,16 +68,39 @@ namespace Kiralynok
                 Console.WriteLine();
             }
         }
+     
 
-
-        public int UresOszlop()
+        public bool UresOszlop(int oszlop)
         {
-            return 0;
+            int j = 0;
+            bool nincs = false;
+            for (int i = 0; i <8; i++)
+            {
+                while(nincs == true && j < 8)
+                    { 
+                
+                    if (T[i,oszlop]!='K')
+                    {
+                        nincs = true;
+                    }
+                    }
+
+            }
+            if (nincs == true)
+            {
+                Console.WriteLine("\n Üres az oszlop");
+            }
+            else
+            {
+                Console.WriteLine("\n Van Királynő az oszlopban");
+            }
+            return nincs;
+
         }
 
-        public int UresSor()
+        public bool UresSor(int sor)
         {
-            return 0;
+            return true;
         }
     }
 
@@ -95,8 +118,10 @@ namespace Kiralynok
             t.Megjelenit();
             Console.WriteLine();
             Console.WriteLine("***************");
-            t.Elhelyez(63);
+            t.Elhelyez(5);
             t.Megjelenit();
+
+            t.UresOszlop(5);
 
             Console.ReadKey();
         }

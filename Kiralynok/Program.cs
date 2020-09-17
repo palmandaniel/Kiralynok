@@ -34,18 +34,18 @@ namespace Kiralynok
             //  -véletlen sor és oszlop
             //elhelyezzük a 'K'-t, csak akkor, ha üres (-> '#')
             Random vel = new Random();
-            int rnd = N;
 
-            for (int i = 0; i <= rnd; i++)
+            for (int i = 0; i < N; i++)
             {
                 int sor = vel.Next(0, 8);
                 int oszlop = vel.Next(0, 8);
-
-                if (T[sor, oszlop] == '#')
+                while (T[sor, oszlop] == 'k')
                 {
-                    T[sor, oszlop] = 'K';
+                    sor = vel.Next(0, 8);
+                    oszlop = vel.Next(0, 8);
                 }
-
+                T[sor, oszlop] = 'K';
+                
             }
           
 
@@ -95,7 +95,7 @@ namespace Kiralynok
             t.Megjelenit();
             Console.WriteLine();
             Console.WriteLine("***************");
-            t.Elhelyez(7);
+            t.Elhelyez(63);
             t.Megjelenit();
 
             Console.ReadKey();

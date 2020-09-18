@@ -12,8 +12,8 @@ namespace kiralyno
         {
             char[,] T;
             private char uresCella;
-            private int uresOszlopokSzama;
-            private int uresSorokSzama;
+            //private int uresOszlopokSzama;
+            //private int uresSorokSzama;
 
             public Tabla(char ch)
             {
@@ -47,8 +47,17 @@ namespace kiralyno
                     T[sor, oszlop] = 'K';
                 }
             }
-            public void FajlbaIr()
+            public void FajlbaIr(StreamWriter fajl)
             {
+                for (int i = 0; i < 8; i++)
+                {
+                    string sor = "";
+                    for (int j = 0; j < 8; j++)
+                    {
+                        sor += T[i, j];
+                    }
+                    fajl.WriteLine(sor);
+                }
             }
             public void Megjelenit()
             {
@@ -72,12 +81,12 @@ namespace kiralyno
                 }
                 if (i < 8)
                 {
-                    Console.WriteLine("Van Királynő");
+                    //Console.WriteLine("Van Királynő");
                     return true;
                 }
                 else
                 {
-                    Console.WriteLine("Nincs királynő");
+                    //Console.WriteLine("Nincs királynő");
                     return false;
                 }
             }
@@ -90,12 +99,12 @@ namespace kiralyno
                 }
                 if (i < 8)
                 {
-                    Console.WriteLine("Van Királynő");
+                    //Console.WriteLine("Van Királynő");
                     return true;
                 }
                 else
                 {
-                    Console.WriteLine("Nincs királynő");
+                    //Console.WriteLine("Nincs királynő");
                     return false;
                 }
             }
@@ -104,6 +113,9 @@ namespace kiralyno
         {
             Console.WriteLine("Királynők feladat");
             Tabla t = new Tabla('#');
+
+            
+
             Console.WriteLine("Üres tábla: ");
             t.Megjelenit();
             Console.WriteLine("\n***************");
@@ -111,15 +123,48 @@ namespace kiralyno
             int db = int.Parse(Console.ReadLine());
             t.Elhelyez(db);
             t.Megjelenit();
-            Console.Write("Hanyadik oszlopot szeretnéd vizsgálni? ");
-            int ho = int.Parse(Console.ReadLine());
-            t.UresOszlop(ho - 1);
-            Console.WriteLine();
-            Console.Write("Hanyadik sort szeretnéd vizsgálni? ");
-            int hs = int.Parse(Console.ReadLine());
-            t.UresSor(hs - 1);
-            Console.WriteLine();
+            //Console.Write("Hanyadik oszlopot szeretnéd vizsgálni? ");
+            //int ho = int.Parse(Console.ReadLine());
+            //t.UresOszlop(ho - 1);
+            //Console.WriteLine();
+            //Console.Write("Hanyadik sort szeretnéd vizsgálni? ");
+            //int hs = int.Parse(Console.ReadLine());
+            //t.UresSor(hs - 1);
+            //Console.WriteLine();
+            int uresSor = 0;
+            int uresOszlop = 0;
 
+            for (int i = 0; i < 8; i++)
+            {
+                if (t.UresSor(i) == false)
+                {
+                    uresSor++;
+                }
+                if (t.UresOszlop(i)==false)
+                {
+                    uresOszlop++;
+                }
+            }
+
+            Console.Write("Üres oszlopok és sorok száma: {0} sor {1} oszlop ", uresSor, uresOszlop);
+
+            StreamWriter ki = new StreamWriter("adatok.txt");
+
+            Tabla[] tablak = new Tabla[64];
+
+            for (int i = 0; i < tablak.Length; i++)
+            {
+                tablak[i] = new Tabla('*');
+            }
+
+            for (int i = 0; i < tablak.Length; i++)
+            { 
+                tablak[i].Elhelyez(i + 1);
+                tablak[i].FajlbaIr(ki);
+                ki.WriteLine();
+            }
+            
+            ki.Close();
             Console.ReadKey();
         }
     }

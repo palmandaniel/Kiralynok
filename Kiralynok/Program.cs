@@ -34,7 +34,7 @@ namespace kiralyno
                 // - Véletlen sor és oszlop kell
                 // - Elhelyezzük a "K"-t csak akkor
                 //   HA!!! üres --> '#'
-                Random vel = new Random();
+                Random vel = new Random(Guid.NewGuid().GetHashCode());
                 for (int i = 0; i < N; i++)
                 {
                     int sor = vel.Next(0, 8);
